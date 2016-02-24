@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{%block title%}CONTACTO{%endblock%}
+{%block h1%}
+	<h1>CONTACTO</h1>
+{%endblock%}
+
+{%block content%}
+        {{enviar}}
+{% if enviar %}
+	Gracias por Enviar la siguiente Información<br/>
+	<p>{{email}}</p>
+	<p>{{titulo}}</p>
+	<p>{{texto}}</p>
+{% else %}
+	<form action="" method="POST" class="form-horizontal" role="form"> {% csrf_token %}
+		{% for field in form %}
+        <div class="form-group">
+            {{ field.errors }}
+            <div class="col-lg-10">
+            {{ field }}
+            </div>
+        </div>
+        {% endfor %}
+		<input type="submit" value="Enviar" class="btn btn-primary">
+	</form>
+{%endif%}
+{%endblock%}
